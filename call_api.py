@@ -1,5 +1,6 @@
 import requests
 from dummy_output import dummy_data
+import json
 url ='http://127.0.0.1:5000/get_linkedin_data?email=example@mail.com'
 
 def call_api(url, method="GET", params=None, data=None, headers=None):
@@ -140,6 +141,9 @@ def transform_response(response):
             individual_data["company"] = company_data
         return individual_data
     else: return dummy_data
-    
+
 output=transform_response(result)
 print(output)
+with open('result.json', 'w') as fp:
+    json.dump(output, fp)
+
